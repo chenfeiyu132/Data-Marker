@@ -4,7 +4,11 @@
 void ofApp::setup(){
     //path to JSON
     std::string path = ofToDataPath("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
-    
+    ofFile file(path);
+    if(file.exists()) {
+        ofLog() << "found file = "<<path<<", loading";
+        ofJson json = ofLoadJson(path);
+    }
 }
 
 //--------------------------------------------------------------
