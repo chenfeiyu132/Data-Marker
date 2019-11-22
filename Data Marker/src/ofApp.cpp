@@ -8,7 +8,12 @@ void ofApp::setup(){
     if(file.exists()) {
         ofLog() << "found file = "<<path<<", loading";
         ofJson json = ofLoadJson(path);
+    } else {
+        ofLog() << "file not found for state name = "<<path;
     }
+    ofBackground(54, 54, 54, 255);
+    ofTrueTypeFont::setGlobalDpi(72);
+    myfont.load("verdana.ttf", 14, true, true);
 }
 
 //--------------------------------------------------------------
@@ -18,7 +23,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+    ofSetColor(225);
+    myfont.drawString("testing testing", 200, 200);
 }
 
 //--------------------------------------------------------------
