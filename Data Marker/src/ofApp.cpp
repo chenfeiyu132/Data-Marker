@@ -3,14 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     //path to JSON
-    std::string path = ofToDataPath("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
-    ofFile file(path);
-    if(file.exists()) {
-        ofLog() << "found file = "<<path<<", loading";
-        ofJson json = ofLoadJson(path);
-    } else {
-        ofLog() << "file not found for state name = "<<path;
-    }
+
+     json.loadJson("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
     ofBackground(54, 54, 54, 255);
     ofTrueTypeFont::setGlobalDpi(72);
     myfont.load("verdana.ttf", 14, true, true);

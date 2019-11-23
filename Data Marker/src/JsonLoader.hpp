@@ -10,11 +10,17 @@
 #define JsonLoader_hpp
 
 #include <stdio.h>
-
-namespace andyWong {
-    
+#include "ofJson.h"
+#include <unordered_set>
+namespace andyWong{
     class JsonLoader {
-        
+        private:
+            std::unordered_set<std::string> fields;
+            int size;
+            ofJson json;
+        public:
+            JsonLoader(){};
+            bool loadJson(const std::string &path);
     };
 }
 

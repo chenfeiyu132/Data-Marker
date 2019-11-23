@@ -12,3 +12,7 @@ November 22, 2019
 - Need to visualize JSON information
 - Decide how to store JSON hiearchy for display
 - Start working on outlining UI layout
+
+November 23, 2019
+- So excited for the flight back to AZ!
+- Created JsonLoader object to better store data regarding json file

@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofTrueTypeFont.h"
+#include "JsonLoader.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -26,4 +27,5 @@ class ofApp : public ofBaseApp{
     
 		ofxPanel gui;
         ofTrueTypeFont myfont;
+        andyWong::JsonLoader json;
 };
