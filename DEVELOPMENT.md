@@ -16,3 +16,8 @@ November 22, 2019
 November 23, 2019
 - So excited for the flight back to AZ!
 - Created JsonLoader object to better store data regarding json file
+
+November 24, 2019
+- First day back home! Got to visit an old neighbor who inspired me to do computer science(He taught me my first language)
+- Set up test environment after solving many issues with the xcode compiler(took way longer than it seems it should)
+- Wrote first test cases for JsonLoader

@@ -4,6 +4,7 @@
 #include "ofxGui.h"
 #include "ofTrueTypeFont.h"
 #include "JsonLoader.hpp"
+#include "ofxUnitTests.h"
 
 class ofApp : public ofBaseApp{
 

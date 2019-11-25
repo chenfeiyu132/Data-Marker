@@ -4,10 +4,13 @@
 void ofApp::setup(){
     //path to JSON
 
-     json.loadJson("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
+     //json.loadJson("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
     ofBackground(54, 54, 54, 255);
     ofTrueTypeFont::setGlobalDpi(72);
+    
     myfont.load("verdana.ttf", 14, true, true);
+    myfont.setLineHeight(18.0f);
+    myfont.setLetterSpacing(1.037);
 }
 
 //--------------------------------------------------------------
