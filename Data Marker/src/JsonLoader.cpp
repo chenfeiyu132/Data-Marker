@@ -9,6 +9,10 @@
 
 namespace andyWong {
     bool JsonLoader::loadJson(const std::string& path) {
+        if(path.empty()) {
+            ofLog() << "Invalid empty path";
+            return false;
+        }
         ofFile file(ofToDataPath(path));
         if(file.exists()) {
             ofLog() << "found file = "<<path<<", loading";
@@ -21,5 +25,7 @@ namespace andyWong {
             return false;
         }
     }
+
+    
 }
 

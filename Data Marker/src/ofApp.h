@@ -5,6 +5,7 @@
 #include "ofTrueTypeFont.h"
 #include "JsonLoader.hpp"
 #include "ofxUnitTests.h"
+#include "ofURLFileLoader.h"
 
 class ofApp : public ofBaseApp{
 
@@ -28,5 +29,6 @@ class ofApp : public ofBaseApp{
     
 		ofxPanel gui;
         ofTrueTypeFont myfont;
+        ofImage img;
         andyWong::JsonLoader json;
 };

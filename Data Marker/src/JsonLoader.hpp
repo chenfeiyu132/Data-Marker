@@ -21,6 +21,7 @@ namespace andyWong{
         public:
             JsonLoader(){};
             bool loadJson(const std::string &path);
+            int jsonHeight(const ofJson& json, int currH);
     };
 }
 

@@ -11,6 +11,7 @@ void ofApp::setup(){
     myfont.load("verdana.ttf", 14, true, true);
     myfont.setLineHeight(18.0f);
     myfont.setLetterSpacing(1.037);
+    img.load("https://openframeworks.cc/about/0.jpg");
 }
 
 //--------------------------------------------------------------
@@ -22,6 +23,7 @@ void ofApp::update(){
 void ofApp::draw(){
     ofSetColor(225);
     myfont.drawString("testing testing", 200, 200);
+    img.draw(img.getWidth(), 0);
 }
 
 //--------------------------------------------------------------
