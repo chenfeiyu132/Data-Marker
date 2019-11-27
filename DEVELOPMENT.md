@@ -26,3 +26,8 @@ November 25, 2019
 - Hit the gym back home for the first time today! Feels good to be back.
 - Researched about loading images from url's (as that will be the main source for Twitter pictures), got test to work.
 - Still researching as to how to divide up the window into sections where different outputs could be visualized
+
+November 26, 2019
+- Haven't hit the gym yet, I really shouldn't be slacking back home, but the motivation really is just lacking.
+- Tested out Gui panel(specifically the toggle feature of ofxGui) which allows the image and text to be hidden or shown.
+- Should start working on event listeners to change the layout of the interface based on the number of features being analyzed on the screen.
