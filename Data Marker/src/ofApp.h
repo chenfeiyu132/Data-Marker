@@ -2,10 +2,9 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "ofTrueTypeFont.h"
 #include "JsonLoader.hpp"
-#include "ofxUnitTests.h"
-#include "ofURLFileLoader.h"
+
+#include "FeatureBox.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -26,16 +25,15 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-        void urlResponse(ofHttpResponse & response);
         void exit();
         //void imageActivate(bool &state);
-        void tweetActivate(bool &state);
+        //void tweetActivate(bool &state);
     
-    
-		ofxPanel gui;
-        ofTrueTypeFont myfont;
-        ofImage img;
-        ofxToggle imageLoad;
-        ofxToggle textLoad;
+        
+		ofxPanel visibility;
+        ofxPanel labelingBox;
+        vector<std::string> labelNames;
+        ofParameterGroup parameterGroup;
+        FeatureBox boxGroup;
         andyWong::JsonLoader json;
 };

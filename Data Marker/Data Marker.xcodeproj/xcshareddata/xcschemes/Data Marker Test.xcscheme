@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0600"
+   LastUpgradeVersion = "1120"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "Data Marker.app"
-               BlueprintName = "Data Marker"
+               BlueprintIdentifier = "EBD94D07238F91DB002B7BEB"
+               BuildableName = "Data Marker Tests.app"
+               BlueprintName = "Data Marker Tests"
                ReferencedContainer = "container:Data Marker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -27,15 +27,6 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "Data Marker.app"
-            BlueprintName = "Data Marker"
-            ReferencedContainer = "container:Data Marker.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
       </Testables>
    </TestAction>
@@ -46,22 +37,22 @@
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
-      debugDocumentVersioning = "YES"
+      debugDocumentVersioning = "NO"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "Data Marker.app"
-            BlueprintName = "Data Marker"
+            BlueprintIdentifier = "EBD94D07238F91DB002B7BEB"
+            BuildableName = "Data Marker Tests.app"
+            BlueprintName = "Data Marker Tests"
             ReferencedContainer = "container:Data Marker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -70,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "Data Marker.app"
-            BlueprintName = "Data Marker"
+            BlueprintIdentifier = "EBD94D07238F91DB002B7BEB"
+            BuildableName = "Data Marker Tests.app"
+            BlueprintName = "Data Marker Tests"
             ReferencedContainer = "container:Data Marker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,7 +72,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

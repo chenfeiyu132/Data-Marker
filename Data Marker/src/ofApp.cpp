@@ -5,29 +5,21 @@ void ofApp::setup(){
     //path to JSON
 
      //json.loadJson("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
-    ofBackground(54, 54, 54, 255);
-    ofTrueTypeFont::setGlobalDpi(72);
-    ofRegisterURLNotification(this);
-    gui.setup();
-    //imageLoad.addListener(this, &ofApp::imageActivate);
-    gui.add(imageLoad.ofxToggle::setup("show Image", true));
-    gui.add(textLoad.ofxToggle::setup("show Tweet", true));
-    
-    myfont.load("verdana.ttf", 14, true, true);
-    myfont.setLineHeight(18.0f);
-    myfont.setLetterSpacing(1.037);
-    img.load("https://openframeworks.cc/about/0.jpg");
-}
-
-void ofApp::urlResponse(ofHttpResponse & response){
-    //case if success
-    if(response.status == 200) {
-        ofLog() << "Picture Download successful";
-        img.load(response.data);
-    } else {
-        ofLog() << "Picture unavailable";
+    ofBackground(255);
+    boxGroup.setup();
+    parameterGroup.add(boxGroup.boxParameters);
+    visibility.setup(parameterGroup);
+    //Setting up labeling panel
+    labelingBox.setup();
+    labelNames.push_back("Yes");
+    labelNames.push_back("No");
+    ofxButton temp;
+    for(std::string name : labelNames) {
+        labelingBox.add(temp.setup(name));
     }
 }
+
+
 
 //--------------------------------------------------------------
 void ofApp::update(){
@@ -35,24 +27,28 @@ void ofApp::update(){
 }
 
 
-void ofApp::tweetActivate(bool &state) {
+/*void ofApp::tweetActivate(bool &state) {
     if(state) {
         ofDrawBitmapString("testing testing", 200, 200);
     } else {
         ofClear(0, 0, 0, 1.f);
     }
-}
+}*/
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetColor(225);
-    if(imageLoad) {
-        img.draw(0, 0);
-    }
-    if(textLoad) {
-        ofDrawBitmapString("testing testing", 200, 200);
-    }
-    gui.draw();
+    ofSetColor(253, 255, 208, 200);
+    ofDrawRectangle(0, 0, ofGetWidth()-150, ofGetHeight());
+    ofSetColor(0);
+    ofNoFill();
+    ofSetLineWidth(10);
+    ofDrawRectangle(0, 0, ofGetWidth()-150, ofGetHeight());
+    ofFill();
+    ofSetColor(255);
+    boxGroup.draw();
+    
+    labelingBox.draw();
+    visibility.draw();
 }
 
 //--------------------------------------------------------------
@@ -111,5 +107,5 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 }
 
 void ofApp::exit() {
-    ofUnregisterURLNotification(this);
+    
 }

@@ -31,3 +31,10 @@ November 26, 2019
 - Haven't hit the gym yet, I really shouldn't be slacking back home, but the motivation really is just lacking.
 - Tested out Gui panel(specifically the toggle feature of ofxGui) which allows the image and text to be hidden or shown.
 - Should start working on event listeners to change the layout of the interface based on the number of features being analyzed on the screen.
+
+November 27, 2019
+- Had hotpot today with the fam. Basically asian thanksgiving dinner right here.
+- Almost encountered the largest crisis due to XCode automatically fixing one of the errors (I hate XCode officially).
+- Created some new objects like featurebox and imagebox to organize labeling space
+- Started working on gui completion by creating buttons for labeling -> still need to figure out how to fix the issue with defining how many labels there should be.
+- Figured out how parameters work in terms of ofxgui.
