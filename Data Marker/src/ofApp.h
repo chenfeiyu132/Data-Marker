@@ -2,9 +2,15 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "JsonLoader.hpp"
+#include "ofJson.h"
 
 #include "FeatureBox.hpp"
+
+struct dataPoint{
+    int Id;
+    ofJson data;
+    std::string label;
+};
 
 class ofApp : public ofBaseApp{
 
@@ -26,14 +32,16 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
         void exit();
+        
         //void imageActivate(bool &state);
         //void tweetActivate(bool &state);
     
         
-		ofxPanel visibility;
+		ofxPanel visibility; //supposedly for feature selection
         ofxPanel labelingBox;
-        vector<std::string> labelNames;
+        std::vector<std::string> labelNames;
+        ofJson json;
+        std::vector<dataPoint> tweets;
         ofParameterGroup parameterGroup;
         FeatureBox boxGroup;
-        andyWong::JsonLoader json;
 };

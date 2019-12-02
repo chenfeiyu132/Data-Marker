@@ -3,8 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     //path to JSON
-
-     //json.loadJson("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
+    loadJson("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
     ofBackground(255);
     boxGroup.setup();
     parameterGroup.add(boxGroup.boxParameters);
@@ -13,17 +12,20 @@ void ofApp::setup(){
     labelingBox.setup();
     labelNames.push_back("Yes");
     labelNames.push_back("No");
-    ofxButton temp;
-    for(std::string name : labelNames) {
-        labelingBox.add(temp.setup(name));
-    }
+    ofParameterGroup labelOptions;
+    /*for(std::string name : labelNames) {
+        ofParameter<void> buttonParam;
+        buttonParam.set(name);
+        labelOptions.add(buttonParam);
+    }*/
+    
 }
 
 
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    
 }
 
 
@@ -107,5 +109,26 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 }
 
 void ofApp::exit() {
+    
+}
+
+void ofApp::loadJson(const std::string &path) {
+    if(path.empty()) {
+        ofLog() << "Invalid empty path";
+        return false;
+    }
+    ofFile file(ofToDataPath(path));
+    if(file.exists()) {
+        ofLog() << "found file = "<<path<<", loading";
+        json = ofLoadJson(path);
+        ofLog() << "json is of size: " << json.size();
+        return true;
+    } else {
+        ofLog() << "file not found for state name = "<<path;
+        return false;
+    }
+}
+
+void ofApp::saveJson(const std::string &path) {
     
 }

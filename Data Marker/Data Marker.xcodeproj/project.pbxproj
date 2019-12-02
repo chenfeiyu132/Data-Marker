@@ -672,11 +672,11 @@
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				83257F22B2A42320F9974C0C /* FeatureBox.hpp */,
-				0056DDC2FB9237571507BB0E /* JsonLoader.cpp */,
-				A81E71828B1DC181468F1C77 /* ImageBox.hpp */,
-				C3E1519179125CB511A2DC0A /* JsonLoader.hpp */,
-				D1C4BB7B37912F3BCB04DEB3 /* ImageBox.cpp */,
 				4BD83BB76BED6794E0D36243 /* FeatureBox.cpp */,
+				A81E71828B1DC181468F1C77 /* ImageBox.hpp */,
+				D1C4BB7B37912F3BCB04DEB3 /* ImageBox.cpp */,
+				0056DDC2FB9237571507BB0E /* JsonLoader.cpp */,
+				C3E1519179125CB511A2DC0A /* JsonLoader.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

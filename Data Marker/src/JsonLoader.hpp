@@ -12,16 +12,31 @@
 #include <stdio.h>
 #include "ofJson.h"
 #include <unordered_set>
+#include <vector>
+#include <string>
 namespace andyWong{
+
+    struct dataPoint{
+        int Id;
+        ofJson data;
+        std::string label;
+    };
+
     class JsonLoader {
         private:
             std::unordered_set<std::string> fields;
             int size;
+            bool jsonLoaded;
+            
             ofJson json;
         public:
-            JsonLoader(){};
+            JsonLoader();
             bool loadJson(const std::string &path);
-            int jsonHeight(const ofJson& json, int currH);
+            bool saveJson(const std::string &path);
+            int jsonHeight(const ofJson& json, int currH);//for future use of visualizing JSON branch
+            int jsonSize();
+            bool beginLabeling();
+            
     };
 }
 

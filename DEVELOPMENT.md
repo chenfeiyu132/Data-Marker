@@ -38,3 +38,9 @@ November 27, 2019
 - Created some new objects like featurebox and imagebox to organize labeling space
 - Started working on gui completion by creating buttons for labeling -> still need to figure out how to fix the issue with defining how many labels there should be.
 - Figured out how parameters work in terms of ofxgui.
+
+December 1, 2019
+- Finally got back to campus after a crazy few days, extremely tired and not ready to start school again
+- Added a few more functionalities to JsonLoader and did some more research with dynamic buttons(creating buttons based on user's choice of options for labeling). It seems like we should treat buttons as ofParameters and use Eventlistener for them to keep track of which buttons are pressed.
+- Trying to figure out the best code design still for json processing. The options are creating a whole new class to do all the processing and store variables remotely or doing everything in the ofApp class. 
+- Currently trying to develop under the premise that all json processing is done using functions defined in ofApp.h and if design errors arise then will switch to remote object processing.
