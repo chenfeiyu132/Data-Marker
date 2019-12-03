@@ -4,13 +4,10 @@
 #include "ofxGui.h"
 #include "ofJson.h"
 
-#include "FeatureBox.hpp"
+#include "TextBox.hpp"
+#include "ImageBox.hpp"
 
-struct dataPoint{
-    int Id;
-    ofJson data;
-    std::string label;
-};
+
 
 class ofApp : public ofBaseApp{
 
@@ -35,13 +32,17 @@ class ofApp : public ofBaseApp{
         
         //void imageActivate(bool &state);
         //void tweetActivate(bool &state);
-    
+        bool loadJson(const std::string &path);
+        void saveJson(const std::string &path);
+        bool initializeDataGroup(const std::string &groupname);
         
 		ofxPanel visibility; //supposedly for feature selection
         ofxPanel labelingBox;
         std::vector<std::string> labelNames;
         ofJson json;
-        std::vector<dataPoint> tweets;
+        int datasetSize;
+        std::vector<ofJson> tweets;
         ofParameterGroup parameterGroup;
-        FeatureBox boxGroup;
+        TextBox textbox;
+        ImageBox imgbox;
 };

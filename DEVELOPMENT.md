@@ -44,3 +44,9 @@ December 1, 2019
 - Added a few more functionalities to JsonLoader and did some more research with dynamic buttons(creating buttons based on user's choice of options for labeling). It seems like we should treat buttons as ofParameters and use Eventlistener for them to keep track of which buttons are pressed.
 - Trying to figure out the best code design still for json processing. The options are creating a whole new class to do all the processing and store variables remotely or doing everything in the ofApp class. 
 - Currently trying to develop under the premise that all json processing is done using functions defined in ofApp.h and if design errors arise then will switch to remote object processing.
+
+December 2, 2019
+- First day back to school. Got up late for my first class so you already know these two weeks boutta be great!
+- Fixed the object structures of textbox and imagebox
+- Successfully split json into smaller json objects using vector and created helper functions for json preparation
+- Next steps will be integrating json information with text and image boxes and adding the flagging buttons as well as their respective functionalities.

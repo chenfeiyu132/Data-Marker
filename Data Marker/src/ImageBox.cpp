@@ -8,15 +8,19 @@
 #include "ImageBox.hpp"
 
 
-void ImageBox::setup() {
-    ofRegisterURLNotification(this);
-    img.load("https://openframeworks.cc/about/0.jpg");
+void ImageBox::setup(const std::string &url, const int &x, const int &y) {
+    this->url = url;
+    response = ofLoadURL(url);
+    urlResponse(response);
+    
+    this-> x = x;
+    this-> y = y;
     ImageVisible.set("Image Visible", true);
 }
 
 void ImageBox::draw() {
     if(ImageVisible) {
-        img.draw(0, 0); //add relative coordinates after
+        img.draw(x, y); //add relative coordinates after
     }
 }
 
@@ -28,8 +32,19 @@ bool ImageBox::urlResponse(ofHttpResponse & response){
         return true;
     } else {
         ofLog() << "Picture unavailable";
+        img.load("https://icon-library.net/images/picture-unavailable-icon/picture-unavailable-icon-5.jpg");
         return false;
     }
+}
+
+void ImageBox::setImgUrl(const std:: string &url) {
+    this->url = url;
+    img.load(this->url);
+    ofRegisterURLNotification(this);
+}
+
+std::string ImageBox::getImgUrl() {
+    return this->url;
 }
 
 void ImageBox::exit() {

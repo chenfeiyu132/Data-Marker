@@ -4,9 +4,19 @@
 void ofApp::setup(){
     //path to JSON
     loadJson("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
+    initializeDataGroup("statuses"); //datapoints initialized
+    
+    
     ofBackground(255);
-    boxGroup.setup();
-    parameterGroup.add(boxGroup.boxParameters);
+    if(!tweets[0]["text"].is_null() && !tweets[0]["text"].empty()) {
+        textbox.setup(tweets[0]["text"], 200, 200);
+    } else {
+        textbox.setup("No text available", 200, 200);
+    }
+    imgbox.setup("https://opnframeworks.cc/about/0.jpg", 30, 50);
+    
+    parameterGroup.add(textbox.Tweet);
+    parameterGroup.add(imgbox.ImageVisible);
     visibility.setup(parameterGroup);
     //Setting up labeling panel
     labelingBox.setup();
@@ -47,7 +57,9 @@ void ofApp::draw(){
     ofDrawRectangle(0, 0, ofGetWidth()-150, ofGetHeight());
     ofFill();
     ofSetColor(255);
-    boxGroup.draw();
+    
+    textbox.draw();
+    imgbox.draw();
     
     labelingBox.draw();
     visibility.draw();
@@ -112,7 +124,7 @@ void ofApp::exit() {
     
 }
 
-void ofApp::loadJson(const std::string &path) {
+bool ofApp::loadJson(const std::string &path) {
     if(path.empty()) {
         ofLog() << "Invalid empty path";
         return false;
@@ -131,4 +143,17 @@ void ofApp::loadJson(const std::string &path) {
 
 void ofApp::saveJson(const std::string &path) {
     
+}
+
+bool ofApp::initializeDataGroup(const std::string &groupname) {
+    if(json[groupname].is_null()) {
+        ofLog() << "group does not exist";
+        return false;
+    }
+    datasetSize = 0;
+    for(auto &datapoint : json[groupname]) {
+        tweets.push_back(datapoint);
+        datasetSize++;
+    }
+    return true;
 }

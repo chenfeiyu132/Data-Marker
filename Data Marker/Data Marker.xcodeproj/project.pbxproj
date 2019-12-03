@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0C5D8C88CED9446CD26D3E92 /* ImageBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BB7B37912F3BCB04DEB3 /* ImageBox.cpp */; };
 		106B9A6182DF98E835C09B47 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA20A4B3FEF378FA209B9E4E /* ofxBaseGui.cpp */; };
-		242391884A710475B2518752 /* FeatureBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BD83BB76BED6794E0D36243 /* FeatureBox.cpp */; };
+		242391884A710475B2518752 /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BD83BB76BED6794E0D36243 /* TextBox.cpp */; };
 		413B65A0F41D699F37AB4C06 /* ofxSliderGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99B37C8367EB4811EEF8E78D /* ofxSliderGroup.cpp */; };
 		75E465AE7EDAD189B42B8D95 /* ofxInputField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C357D495FA2C612DDB38FC2 /* ofxInputField.cpp */; };
 		81BE400C35825643551A3190 /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73799D65360CD587DCAE90A0 /* ofxLabel.cpp */; };
@@ -25,7 +25,7 @@
 		EBD94D0B238F91DB002B7BEB /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
 		EBD94D0C238F91DB002B7BEB /* JsonLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0056DDC2FB9237571507BB0E /* JsonLoader.cpp */; };
 		EBD94D0D238F91DB002B7BEB /* ImageBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1C4BB7B37912F3BCB04DEB3 /* ImageBox.cpp */; };
-		EBD94D0E238F91DB002B7BEB /* FeatureBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BD83BB76BED6794E0D36243 /* FeatureBox.cpp */; };
+		EBD94D0E238F91DB002B7BEB /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BD83BB76BED6794E0D36243 /* TextBox.cpp */; };
 		EBD94D0F238F91DB002B7BEB /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA20A4B3FEF378FA209B9E4E /* ofxBaseGui.cpp */; };
 		EBD94D10238F91DB002B7BEB /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE859610F3926950EBBC8B13 /* ofxButton.cpp */; };
 		EBD94D11238F91DB002B7BEB /* ofxColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1824C7C391A2977DC5B741C4 /* ofxColorPicker.cpp */; };
@@ -70,12 +70,12 @@
 		27CE0445D02D803853EC74E8 /* ofxPanel.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxPanel.cpp; path = ../../../../addons/ofxGui/src/ofxPanel.cpp; sourceTree = SOURCE_ROOT; };
 		44C0961009D36089EBA9C36F /* ofxGuiGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxGuiGroup.h; path = ../../../../addons/ofxGui/src/ofxGuiGroup.h; sourceTree = SOURCE_ROOT; };
 		481083C90D96C0AAA580E194 /* ofxButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxButton.h; path = ../../../../addons/ofxGui/src/ofxButton.h; sourceTree = SOURCE_ROOT; };
-		4BD83BB76BED6794E0D36243 /* FeatureBox.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = FeatureBox.cpp; path = src/FeatureBox.cpp; sourceTree = SOURCE_ROOT; };
+		4BD83BB76BED6794E0D36243 /* TextBox.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = TextBox.cpp; path = src/TextBox.cpp; sourceTree = SOURCE_ROOT; };
 		4EBE44F173B46F539D0F4741 /* ofxPanel.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxPanel.h; path = ../../../../addons/ofxGui/src/ofxPanel.h; sourceTree = SOURCE_ROOT; };
 		607FCA3A979EBCF02F0B00FC /* ofxGui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxGui.h; path = ../../../../addons/ofxGui/src/ofxGui.h; sourceTree = SOURCE_ROOT; };
 		73799D65360CD587DCAE90A0 /* ofxLabel.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxLabel.cpp; path = ../../../../addons/ofxGui/src/ofxLabel.cpp; sourceTree = SOURCE_ROOT; };
 		78F524ADA8DDC5DF3F460FA5 /* ofxToggle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxToggle.h; path = ../../../../addons/ofxGui/src/ofxToggle.h; sourceTree = SOURCE_ROOT; };
-		83257F22B2A42320F9974C0C /* FeatureBox.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = FeatureBox.hpp; path = src/FeatureBox.hpp; sourceTree = SOURCE_ROOT; };
+		83257F22B2A42320F9974C0C /* TextBox.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = TextBox.hpp; path = src/TextBox.hpp; sourceTree = SOURCE_ROOT; };
 		99B37C8367EB4811EEF8E78D /* ofxSliderGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxSliderGroup.cpp; path = ../../../../addons/ofxGui/src/ofxSliderGroup.cpp; sourceTree = SOURCE_ROOT; };
 		99BDB3B23FCF282EB2B48FAE /* ofxColorPicker.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxColorPicker.h; path = ../../../../addons/ofxGui/src/ofxColorPicker.h; sourceTree = SOURCE_ROOT; };
 		A81E71828B1DC181468F1C77 /* ImageBox.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ImageBox.hpp; path = src/ImageBox.hpp; sourceTree = SOURCE_ROOT; };
@@ -671,8 +671,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				83257F22B2A42320F9974C0C /* FeatureBox.hpp */,
-				4BD83BB76BED6794E0D36243 /* FeatureBox.cpp */,
+				83257F22B2A42320F9974C0C /* TextBox.hpp */,
+				4BD83BB76BED6794E0D36243 /* TextBox.cpp */,
 				A81E71828B1DC181468F1C77 /* ImageBox.hpp */,
 				D1C4BB7B37912F3BCB04DEB3 /* ImageBox.cpp */,
 				0056DDC2FB9237571507BB0E /* JsonLoader.cpp */,
@@ -853,7 +853,7 @@
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				8F8887A353D20A912E989043 /* JsonLoader.cpp in Sources */,
 				0C5D8C88CED9446CD26D3E92 /* ImageBox.cpp in Sources */,
-				242391884A710475B2518752 /* FeatureBox.cpp in Sources */,
+				242391884A710475B2518752 /* TextBox.cpp in Sources */,
 				106B9A6182DF98E835C09B47 /* ofxBaseGui.cpp in Sources */,
 				A61B54CA66E926867C59D2C6 /* ofxButton.cpp in Sources */,
 				CA7E31A02CAF4836F8551ADD /* ofxColorPicker.cpp in Sources */,
@@ -876,7 +876,7 @@
 				EBD94D2E238F9621002B7BEB /* testsmain.cpp in Sources */,
 				EBD94D0C238F91DB002B7BEB /* JsonLoader.cpp in Sources */,
 				EBD94D0D238F91DB002B7BEB /* ImageBox.cpp in Sources */,
-				EBD94D0E238F91DB002B7BEB /* FeatureBox.cpp in Sources */,
+				EBD94D0E238F91DB002B7BEB /* TextBox.cpp in Sources */,
 				EBD94D0F238F91DB002B7BEB /* ofxBaseGui.cpp in Sources */,
 				EBD94D10238F91DB002B7BEB /* ofxButton.cpp in Sources */,
 				EBD94D11238F91DB002B7BEB /* ofxColorPicker.cpp in Sources */,

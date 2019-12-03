@@ -46,7 +46,6 @@ bool JsonLoader::beginLabeling() {
         return false;
     }
     ofLog() << "Labeling process starting";
-    itr = json.begin();
 }
 
 
