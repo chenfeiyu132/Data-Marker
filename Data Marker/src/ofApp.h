@@ -2,12 +2,16 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "ofxUIUtils.h"
 #include "ofJson.h"
 
 #include "TextBox.hpp"
 #include "ImageBox.hpp"
 
-
+enum class Mode {
+    Binary,
+    Custom
+};
 
 class ofApp : public ofBaseApp{
 
@@ -32,17 +36,30 @@ class ofApp : public ofBaseApp{
         
         //void imageActivate(bool &state);
         //void tweetActivate(bool &state);
-        bool loadJson(const std::string &path);
-        void saveJson(const std::string &path);
+        
         bool initializeDataGroup(const std::string &groupname);
         
+        
 		ofxPanel visibility; //supposedly for feature selection
-        ofxPanel labelingBox;
-        std::vector<std::string> labelNames;
-        ofJson json;
-        int datasetSize;
-        std::vector<ofJson> tweets;
         ofParameterGroup parameterGroup;
+        
         TextBox textbox;
         ImageBox imgbox;
+    
+        Mode currMode;
+        ofxPanel labelingBox;
+        std::vector<std::string> labelNames;
+        void onClickLabel(const void * v);
+        void addLabelOption(const std::string &buttonName, ofParameterGroup &group);
+    
+    
+    
+        ofJson json;
+        ofJson::iterator tweet;
+        bool loadJson(const std::string &path);
+        void saveJson(const std::string &path);
+    
+        int datasetSize;
+        
+        
 };

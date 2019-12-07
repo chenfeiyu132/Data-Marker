@@ -50,3 +50,10 @@ December 2, 2019
 - Fixed the object structures of textbox and imagebox
 - Successfully split json into smaller json objects using vector and created helper functions for json preparation
 - Next steps will be integrating json information with text and image boxes and adding the flagging buttons as well as their respective functionalities.
+
+December 6, 2019
+- Successfully integrated label buttons and made them dynamic
+- Fixed issue with text coloring
+- Figured out how ofParameter with buttons and ofEventlistener functions work
+- Next step would be making a textfield and connect it with the labelbox
+

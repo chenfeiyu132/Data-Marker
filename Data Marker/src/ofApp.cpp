@@ -5,26 +5,32 @@ void ofApp::setup(){
     //path to JSON
     loadJson("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
     initializeDataGroup("statuses"); //datapoints initialized
+    currMode = Mode::Binary; //default mode
     
+   
     
     ofBackground(255);
-    if(!tweets[0]["text"].is_null() && !tweets[0]["text"].empty()) {
-        textbox.setup(tweets[0]["text"], 200, 200);
+    if(!tweet.value()["text"].empty()) {
+        textbox.setup(tweet.value()["text"], 200, 200);
     } else {
         textbox.setup("No text available", 200, 200);
     }
-    imgbox.setup("https://opnframeworks.cc/about/0.jpg", 30, 50);
+    imgbox.setup("https://openframeworks.cc/about/0.jpg", 30, 50);
     
     parameterGroup.add(textbox.Tweet);
     parameterGroup.add(imgbox.ImageVisible);
     visibility.setup(parameterGroup);
     //Setting up labeling panel
-    labelingBox.setup();
-    labelNames.push_back("Yes");
-    labelNames.push_back("No");
     ofParameterGroup labelOptions;
+    if(currMode == Mode::Binary) {
+        addLabelOption("yes", labelOptions);
+        addLabelOption("no", labelOptions);
+    }
+    labelingBox.setup(labelOptions, "labels", 300, 300);
+    
+    
     /*for(std::string name : labelNames) {
-        ofParameter<void> buttonParam;
+        
         buttonParam.set(name);
         labelOptions.add(buttonParam);
     }*/
@@ -49,6 +55,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    
     ofSetColor(253, 255, 208, 200);
     ofDrawRectangle(0, 0, ofGetWidth()-150, ofGetHeight());
     ofSetColor(0);
@@ -57,9 +65,9 @@ void ofApp::draw(){
     ofDrawRectangle(0, 0, ofGetWidth()-150, ofGetHeight());
     ofFill();
     ofSetColor(255);
-    
-    textbox.draw();
     imgbox.draw();
+    ofSetColor(0);
+    textbox.draw();
     
     labelingBox.draw();
     visibility.draw();
@@ -151,9 +159,28 @@ bool ofApp::initializeDataGroup(const std::string &groupname) {
         return false;
     }
     datasetSize = 0;
-    for(auto &datapoint : json[groupname]) {
-        tweets.push_back(datapoint);
-        datasetSize++;
-    }
+    tweet = json[groupname].begin();
     return true;
+}
+
+void ofApp::onClickLabel(const void * sender) {
+    ofParameter<void> * button = (ofParameter<void> *)sender;
+    if(button->getName() == "yes") {
+        tweet.value()["label"] = true;
+        ofLog() << "yes was pressed";
+        
+    } else if(button->getName() == "no") {
+        tweet.value()["label"] = false;
+        ofLog() << "no was pressed";
+        
+    } else {
+        tweet.value()["label"] = button->getName();
+        ofLog() << button->getName() + " was pressed";
+    }
+}
+
+void ofApp::addLabelOption(const std::string &buttonName, ofParameterGroup &group) {
+    ofParameter<void> button{buttonName};
+    button.addListener(this, &ofApp::onClickLabel);
+    group.add(button);
 }

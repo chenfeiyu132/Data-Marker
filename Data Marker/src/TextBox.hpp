@@ -16,7 +16,7 @@ public:
     void setup(const std::string &text, const int &x, const int &y);
     void draw();
     void setText(const std::string &text);
-    std::string getText();
+    string getText();
 
     void setCoordinates(const int &x, const int &y);
     void setX(const int &x);
