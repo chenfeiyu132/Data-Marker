@@ -3,37 +3,71 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     //path to JSON
-    loadJson("/Users/Ju1y/Documents/Openframeworks/apps/myApps/fantastic-finale-chenfeiyu132/example_2.json");
-    initializeDataGroup("statuses"); //datapoints initialized
+   ofFileDialogResult result = ofSystemLoadDialog("Import JSON file");
+    if(result.bSuccess) {
+        currJsonPath = result.getPath();
+        loadJson(currJsonPath);
+    } else {
+        ofSystemAlertDialog("JSON file not found or invalid JSON file");
+        ofExit();
+        std::exit(0);
+    }
+    
+    initializeDataGroup(""); //datapoints initialized
     currMode = Mode::Binary; //default mode
     
-   
+    panel = new ofxDatGui( ofxDatGuiAnchor::TOP_RIGHT );
+    
+    //Add import and export buttons
+    panel->addButton("Import");
+    panel->getButton("Import")->onButtonEvent([&](ofxDatGuiButtonEvent button) {
+        ofSystemAlertDialog("Please Select JSON File to be imported");
+        currJsonPath = result.getPath();
+        loadJson(currJsonPath);
+    });
+    panel->addButton("Export")->onButtonEvent([&](ofxDatGuiButtonEvent button) {
+        saveJson(currJsonPath, json);
+    });
+    
+    
+    //Adds dropdown menu selection for mode
+    vector<string> modeOptions = {"Binary", "Custom"};
+    panel->addDropdown("Mode Selection", modeOptions);
+    panel->getDropdown("Mode Selection")->onDropdownEvent(this, &ofApp::onModeSelectionEvent);
+    panel->getDropdown("Mode Selection")->select(0);
+    
+    //Setting up labeling panel
+    
+    //text input field to add custom
+    panel->addTextInput("Label Option");
+    panel->getTextInput("Label Option")->onTextInputEvent([&](ofxDatGuiTextInputEvent input) {
+        addLabelOption(input.text, labelOptions);
+        input.target->setText("");
+        ofLog() << input.text;
+    });
+    
+    //initialize labelbox with binary labels
+    onModeChange(labelOptions);
+    labelingBox.setup(labelOptions, "labels", 300, 300);
     
     ofBackground(255);
-    if(!tweet.value()["text"].empty()) {
-        textbox.setup(tweet.value()["text"], 200, 200);
+    if(!tweet.value()["full_text"].empty()) {
+        textbox.setup(tweet.value()["full_text"], 200, 200);
     } else {
         textbox.setup("No text available", 200, 200);
     }
-    imgbox.setup("https://openframeworks.cc/about/0.jpg", 30, 50);
+    if(!tweet.value()["entities"]["urls"].empty()) {
+        imgbox.setup(tweet.value()["entities"]["urls"][0], 30, 50);
+    } else {
+        imgbox.setup("", 30, 50);
+    }
+    
     
     parameterGroup.add(textbox.Tweet);
     parameterGroup.add(imgbox.ImageVisible);
     visibility.setup(parameterGroup);
-    //Setting up labeling panel
-    ofParameterGroup labelOptions;
-    if(currMode == Mode::Binary) {
-        addLabelOption("yes", labelOptions);
-        addLabelOption("no", labelOptions);
-    }
-    labelingBox.setup(labelOptions, "labels", 300, 300);
     
     
-    /*for(std::string name : labelNames) {
-        
-        buttonParam.set(name);
-        labelOptions.add(buttonParam);
-    }*/
     
 }
 
@@ -134,32 +168,45 @@ void ofApp::exit() {
 
 bool ofApp::loadJson(const std::string &path) {
     if(path.empty()) {
-        ofLog() << "Invalid empty path";
+        ofSystemAlertDialog("Invalid empty path");
         return false;
     }
     ofFile file(ofToDataPath(path));
     if(file.exists()) {
-        ofLog() << "found file = "<<path<<", loading";
+        ofSystemAlertDialog("found file = " + path + " loading");
         json = ofLoadJson(path);
         ofLog() << "json is of size: " << json.size();
         return true;
     } else {
-        ofLog() << "file not found for state name = "<<path;
+        ofSystemAlertDialog("found not found or invalid");
         return false;
     }
 }
 
-void ofApp::saveJson(const std::string &path) {
-    
+void ofApp::saveJson(const std::string &path, const ofJson jsonToSave) {
+    ofSaveJson(path, jsonToSave);
+    ofSystemAlertDialog("Json File saved successfully");
 }
 
 bool ofApp::initializeDataGroup(const std::string &groupname) {
-    if(json[groupname].is_null()) {
-        ofLog() << "group does not exist";
-        return false;
+    
+    if(groupname == ""){
+        if(json.is_null()) {
+            ofLog() << "group does not exist";
+            return false;
+        }
+    } else {
+        if(json[groupname].is_null()) {
+            ofLog() << "group does not exist";
+            return false;
+        }
     }
     datasetSize = 0;
-    tweet = json[groupname].begin();
+    if(groupname == ""){
+        tweet = json.begin();
+    } else {
+        tweet = json[groupname].begin();
+    }
     return true;
 }
 
@@ -183,4 +230,38 @@ void ofApp::addLabelOption(const std::string &buttonName, ofParameterGroup &grou
     ofParameter<void> button{buttonName};
     button.addListener(this, &ofApp::onClickLabel);
     group.add(button);
+    labelingBox.clear();
+    labelingBox.add(group);
+}
+
+void ofApp::removeLabelOption(const std::string &buttonName, ofParameterGroup &group) {
+    group.remove(buttonName);
+}
+
+void ofApp::onModeChange(ofParameterGroup &group) {
+    if(group.size() != 0) {
+        group.clear();
+    }
+    labelingBox.clear();
+    switch(currMode) {
+        case Mode::Binary:
+            panel->getTextInput("Label Option")->setEnabled(false);
+            addLabelOption("yes", group);
+            addLabelOption("no", group);
+            break;
+        case Mode::Custom:
+            panel->getTextInput("Label Option")->setEnabled(true);
+            break;
+    }
+}
+
+void ofApp::onModeSelectionEvent(ofxDatGuiDropdownEvent e) {
+    currMode = static_cast<Mode>(e.child);
+    bool inputBoxEnabled = panel->getTextInput("Label Option")->getEnabled();
+    if(currMode == Mode::Custom && !inputBoxEnabled) {
+        onModeChange(labelOptions);
+    } else if(currMode == Mode::Binary && inputBoxEnabled){
+        onModeChange(labelOptions);
+    }
+    ofLog() << "Index: " << e.child << " was selected";
 }

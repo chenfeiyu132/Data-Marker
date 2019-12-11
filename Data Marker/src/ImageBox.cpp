@@ -9,10 +9,13 @@
 
 
 void ImageBox::setup(const std::string &url, const int &x, const int &y) {
-    this->url = url;
-    response = ofLoadURL(url);
+    if(!url.empty()) {
+        this->url = url;
+        response = ofLoadURL(url);
+    } else {
+        response = ofLoadURL("sdjaklsdjaskd");
+    }
     urlResponse(response);
-    
     this-> x = x;
     this-> y = y;
     ImageVisible.set("Image Visible", true);

@@ -1,3 +1,4 @@
+ofxDatGui
+ofxDropdown
 ofxGui
-ofxUIUtils
 ofxUnitTests

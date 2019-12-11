@@ -57,3 +57,10 @@ December 6, 2019
 - Figured out how ofParameter with buttons and ofEventlistener functions work
 - Next step would be making a textfield and connect it with the labelbox
 
+December 10, 2019
+- Successfully integrated import and export buttons for json files
+- Fixed issue with json reading
+- Fixed issue with adding labels and switching between modes
+- Next step would be getting next and last buttons to switch between different posts
+- Also consider adding more features
+- Last step would be finishing the placement of boxes
