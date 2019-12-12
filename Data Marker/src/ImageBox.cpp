@@ -8,7 +8,7 @@
 #include "ImageBox.hpp"
 
 
-void ImageBox::setup(const std::string &url, const int &x, const int &y) {
+void ImageBox::setup(const std::string &url, const int &width, const int &height, const int &x, const int &y) {
     if(!url.empty()) {
         this->url = url;
         response = ofLoadURL(url);
@@ -16,6 +16,7 @@ void ImageBox::setup(const std::string &url, const int &x, const int &y) {
         response = ofLoadURL("sdjaklsdjaskd");
     }
     urlResponse(response);
+    img.resize(width, height);
     this-> x = x;
     this-> y = y;
     ImageVisible.set("Image Visible", true);

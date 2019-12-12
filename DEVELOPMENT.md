@@ -64,3 +64,8 @@ December 10, 2019
 - Next step would be getting next and last buttons to switch between different posts
 - Also consider adding more features
 - Last step would be finishing the placement of boxes
+
+December 11, 2019
+-Successfully integrated next and last buttons to switch between posts
+-Integrated boxes around textfield
+-Program basic functionality is complete

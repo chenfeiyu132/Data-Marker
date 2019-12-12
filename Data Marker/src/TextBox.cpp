@@ -7,23 +7,29 @@
 
 #include "TextBox.hpp"
 
-void TextBox::setup(const std::string &text, const int &x, const int &y) {
+void TextBox::setup(const std::string &text, const int &width, const int &x, const int &y) {
     
     Tweet.set("Tweet", true);
-    ofTrueTypeFont::setGlobalDpi(72);
-    myfont.load("verdana.ttf", 14, true, true);
-    myfont.setLineHeight(18.0f);
-    myfont.setLetterSpacing(1.037);
     this->x = x;
     this->y = y;
     this->text = text;
+    this->width = width;
+    paragraph = ofxParagraph(text, width);
+    paragraph.setFont("verdana.ttf", 12);
+    paragraph.setIndent(0);
+    paragraph.setAlignment(ofxParagraph::ALIGN_CENTER);
 }
 
 
 
 void TextBox::draw() {
     if(Tweet) {
-        myfont.drawString(text, x, y);
+        ofSetColor(15);
+        ofDrawBitmapString("Tweet", x+paragraph.getWidth()/2, y-paragraph.getHeight()/2-12);
+        ofSetColor(255);
+        ofDrawRectRounded(x, y-paragraph.getHeight()/2, paragraph.getWidth(), paragraph.getHeight()*2, 10);
+        ofSetColor(0);
+        paragraph.draw(x, y);
     }
 }
 
@@ -44,11 +50,18 @@ void TextBox::setX(const int &x) {
 void TextBox::setY(const int &y) {
     this->y = y;
 }
+void TextBox::setWidth(const int &width) {
+    this->width = width;
+    paragraph = ofxParagraph(text, this->width);
+}
 int TextBox::getX() {
     return this->x;
 }
 int TextBox::getY() {
     return this->y;
+}
+int TextBox::getWidth(){
+    return this->width;
 }
 
 

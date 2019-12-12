@@ -2,32 +2,98 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    //path to JSON
-   ofFileDialogResult result = ofSystemLoadDialog("Import JSON file");
-    if(result.bSuccess) {
-        currJsonPath = result.getPath();
-        loadJson(currJsonPath);
-    } else {
-        ofSystemAlertDialog("JSON file not found or invalid JSON file");
-        ofExit();
-        std::exit(0);
-    }
     
-    initializeDataGroup(""); //datapoints initialized
-    currMode = Mode::Binary; //default mode
-    
-    panel = new ofxDatGui( ofxDatGuiAnchor::TOP_RIGHT );
-    
+    panel = new ofxDatGui( ofxDatGuiAnchor::TOP_RIGHT);
+    panel->setWidth(ofGetWidth()-804);
     //Add import and export buttons
-    panel->addButton("Import");
-    panel->getButton("Import")->onButtonEvent([&](ofxDatGuiButtonEvent button) {
+    
+    panel->addFolder("File", ofColor::white);
+    
+    panel->getFolder("File")->addButton("Import")->onButtonEvent([&](ofxDatGuiButtonEvent button) {
         ofSystemAlertDialog("Please Select JSON File to be imported");
-        currJsonPath = result.getPath();
-        loadJson(currJsonPath);
+        importFile();
     });
-    panel->addButton("Export")->onButtonEvent([&](ofxDatGuiButtonEvent button) {
+    panel->getFolder("File")->addButton("Export")->onButtonEvent([&](ofxDatGuiButtonEvent button) {
         saveJson(currJsonPath, json);
     });
+    panel->getFolder("File")->expand();
+
+    //Add feature visibility options
+    panel->addFolder("Visibility", ofColor::blue);
+    
+    panel->getFolder("Visibility")->addToggle("Tweet", true)->onToggleEvent([&](ofxDatGuiToggleEvent e) {
+        e.checked == true ? textbox.Tweet=true : textbox.Tweet=false;
+    });
+    
+    panel->getFolder("Visibility")->addToggle("Image", true)->onToggleEvent([&](ofxDatGuiToggleEvent e) {
+        e.checked == true ? imgbox.ImageVisible = true : imgbox.ImageVisible = false;
+    });
+    
+    panel->getFolder("Visibility")->expand();
+    
+    //Add navigating buttons
+    panel->addFolder("Data Navigation", ofColor::green);
+    
+    panel->getFolder("Data Navigation")->addButton("Last Post")->onButtonEvent([&](ofxDatGuiButtonEvent button){
+        if(tweet != json.begin()) {
+            tweet--;
+            updateTweet();
+        } else {
+            ofSystemAlertDialog("You are on the first post");
+        }
+    });
+    
+    panel->getFolder("Data Navigation")->addButton("Next Post")->onButtonEvent([&](ofxDatGuiButtonEvent button) {
+        
+        if(++tweet != json.end()) {
+            updateTweet();
+        } else {
+            tweet--;
+            ofSystemAlertDialog("You are on the last post");
+        }
+    });
+    
+    panel->getFolder("Data Navigation")->addButton("Last unlabeled post")->onButtonEvent([&](ofxDatGuiButtonEvent button) {
+        ofJson::iterator tempj;
+        if(tweet != json.begin()) {
+            tempj = tweet;
+            tempj--;
+        } else {
+            ofSystemAlertDialog("You are at the beginning of the set");
+            return;
+        }
+        while(tempj != json.begin() && !tempj.value()["label"].is_null()) {
+            tempj--;
+        }
+        if(!tempj.value()["label"].is_null()) {
+            ofSystemAlertDialog("All tweets are labeled before");
+        } else {
+            tweet = tempj;
+            updateTweet();
+        }
+    });
+    
+    panel->getFolder("Data Navigation")->addButton("Next unlabeled post")->onButtonEvent([&](ofxDatGuiButtonEvent button) {
+        ofJson::iterator tempj;
+        if(++tweet != json.end()) {
+            tempj = --tweet;
+            tempj++;
+        } else {
+            ofSystemAlertDialog("You are at the end of the set");
+            tweet--;
+            return;
+        }
+        while(tempj != json.end() && !tempj.value()["label"].is_null()) {
+            tempj++;
+        }
+        if(!tempj.value()["label"].is_null()) {
+            ofSystemAlertDialog("Tweet all labeled after");
+        } else {
+            tweet = tempj;
+            updateTweet();
+        }
+    });
+    panel->getFolder("Data Navigation")->expand();
     
     
     //Adds dropdown menu selection for mode
@@ -46,27 +112,25 @@ void ofApp::setup(){
         ofLog() << input.text;
     });
     
-    //initialize labelbox with binary labels
+    
+    
+    
+    //initialize labelbox with binary label
     onModeChange(labelOptions);
-    labelingBox.setup(labelOptions, "labels", 300, 300);
+    labelingBox.setup(labelOptions, "labels", ofGetWidth()-210, panel->getHeight());
     
-    ofBackground(255);
-    if(!tweet.value()["full_text"].empty()) {
-        textbox.setup(tweet.value()["full_text"], 200, 200);
-    } else {
-        textbox.setup("No text available", 200, 200);
+    
+    //default settings
+    
+    currMode = Mode::Binary;
+    
+    //path to JSON
+    importFile();//datapoints initialized
+    
+    if(currJsonPath.empty()) {
+        ofExit();
+        std::exit(0);
     }
-    if(!tweet.value()["entities"]["urls"].empty()) {
-        imgbox.setup(tweet.value()["entities"]["urls"][0], 30, 50);
-    } else {
-        imgbox.setup("", 30, 50);
-    }
-    
-    
-    parameterGroup.add(textbox.Tweet);
-    parameterGroup.add(imgbox.ImageVisible);
-    visibility.setup(parameterGroup);
-    
     
     
 }
@@ -89,22 +153,27 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
-    
+    //sea green
+    ofSetColor(18, 55, 34, 188);
+    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    //draw main rectangle
     ofSetColor(253, 255, 208, 200);
-    ofDrawRectangle(0, 0, ofGetWidth()-150, ofGetHeight());
+    ofDrawRectangle(0, 0, ofGetWidth()-220, ofGetHeight());
+    
+    //draw frame for main rectangle
     ofSetColor(0);
     ofNoFill();
     ofSetLineWidth(10);
-    ofDrawRectangle(0, 0, ofGetWidth()-150, ofGetHeight());
+    ofDrawRectangle(0, 0, ofGetWidth()-220, ofGetHeight());
+    
     ofFill();
     ofSetColor(255);
     imgbox.draw();
     ofSetColor(0);
+    ofDrawBitmapString("Image", imgbox.x + imgbox.img.getWidth()/2-5, imgbox.y-20);
     textbox.draw();
     
     labelingBox.draw();
-    visibility.draw();
 }
 
 //--------------------------------------------------------------
@@ -149,7 +218,7 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    updateTweet();
 }
 
 //--------------------------------------------------------------
@@ -173,12 +242,15 @@ bool ofApp::loadJson(const std::string &path) {
     }
     ofFile file(ofToDataPath(path));
     if(file.exists()) {
-        ofSystemAlertDialog("found file = " + path + " loading");
+        ofSystemAlertDialog("Json loaded successfully");
         json = ofLoadJson(path);
+        tweet = json.begin();
         ofLog() << "json is of size: " << json.size();
+        ofBackground(255);
+        updateTweet();
         return true;
     } else {
-        ofSystemAlertDialog("found not found or invalid");
+        ofSystemAlertDialog("file not found or invalid");
         return false;
     }
 }
@@ -186,28 +258,6 @@ bool ofApp::loadJson(const std::string &path) {
 void ofApp::saveJson(const std::string &path, const ofJson jsonToSave) {
     ofSaveJson(path, jsonToSave);
     ofSystemAlertDialog("Json File saved successfully");
-}
-
-bool ofApp::initializeDataGroup(const std::string &groupname) {
-    
-    if(groupname == ""){
-        if(json.is_null()) {
-            ofLog() << "group does not exist";
-            return false;
-        }
-    } else {
-        if(json[groupname].is_null()) {
-            ofLog() << "group does not exist";
-            return false;
-        }
-    }
-    datasetSize = 0;
-    if(groupname == ""){
-        tweet = json.begin();
-    } else {
-        tweet = json[groupname].begin();
-    }
-    return true;
 }
 
 void ofApp::onClickLabel(const void * sender) {
@@ -264,4 +314,28 @@ void ofApp::onModeSelectionEvent(ofxDatGuiDropdownEvent e) {
         onModeChange(labelOptions);
     }
     ofLog() << "Index: " << e.child << " was selected";
+}
+
+void ofApp::importFile() {
+    ofFileDialogResult result = ofSystemLoadDialog("Please Import JSON file");
+    if(result.bSuccess) {
+        currJsonPath = result.getPath();
+        loadJson(currJsonPath);
+    } else {
+        ofSystemAlertDialog("Error in getting JSON file, please try again");
+    }
+}
+
+void ofApp::updateTweet() {
+    if(!tweet.value()["full_text"].empty()) {
+        textbox.setup(tweet.value()["full_text"], (ofGetWidth()-220)*4/5, (ofGetWidth()-220)*1/10, ofGetHeight()*3/4);
+    } else {
+        textbox.setup("No text available", (ofGetWidth()-220)*4/5, (ofGetWidth()-220)*1/10, ofGetHeight()*3/4);
+    }
+    if(!tweet.value()["media"]["media_url_https"].empty()) {
+        imgbox.setup(tweet.value()["media"]["media_url_https"], (ofGetWidth()-220)*4/5, ofGetHeight()*3/5,(ofGetWidth()-220)*1/10, ofGetHeight()*1/20);
+        ofLog() << "Media url found " << tweet.value()["media_url_https"];
+    } else {
+        imgbox.setup("", (ofGetWidth()-220)*4/5, ofGetHeight()*3/5, (ofGetWidth()-220)*1/10, ofGetHeight()*1/20);
+    }
 }

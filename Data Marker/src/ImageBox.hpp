@@ -13,7 +13,7 @@
 
 class ImageBox {
 public:
-    void setup(const std::string &url, const int &x, const int &y);
+    void setup(const std::string &url, const int& width, const int& height, const int &x, const int &y);
     void draw();
     bool urlResponse(ofHttpResponse &response);
     void setImgUrl(const std:: string &url);

@@ -10,10 +10,11 @@
 
 #include "ofMain.h"
 #include "ImageBox.hpp"
+#include "ofxParagraph.h"
 
 class TextBox{
 public:
-    void setup(const std::string &text, const int &x, const int &y);
+    void setup(const std::string &text, const int& width, const int &x, const int &y);
     void draw();
     void setText(const std::string &text);
     string getText();
@@ -21,15 +22,20 @@ public:
     void setCoordinates(const int &x, const int &y);
     void setX(const int &x);
     void setY(const int &y);
+    void setWidth(const int &width);
     int getX();
     int getY();
+    int getWidth();
     ofParameter<bool> Tweet;
+    ofxParagraph paragraph;
+    
 
 private:
     int x;
     int y;
+    int width;
     std::string text;
-    ofTrueTypeFont myfont;
+    
 };
 
 #endif /* TextBox_hpp */

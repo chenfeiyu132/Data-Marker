@@ -1,4 +1,4 @@
 ofxDatGui
-ofxDropdown
 ofxGui
+ofxParagraph
 ofxUnitTests

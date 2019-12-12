@@ -37,15 +37,13 @@ class ofApp : public ofBaseApp{
         //void imageActivate(bool &state);
         //void tweetActivate(bool &state);
         
-        bool initializeDataGroup(const std::string &groupname);
         
-        
-		ofxPanel visibility; //supposedly for feature selection
-        ofParameterGroup parameterGroup;
+        //maybe add another panel for feature selection
         ofParameterGroup modeSelection;
         
         TextBox textbox;
         ImageBox imgbox;
+        void updateTweet();
     
         Mode currMode;
         ofxPanel labelingBox;
@@ -64,6 +62,8 @@ class ofApp : public ofBaseApp{
         ofJson::iterator tweet;
         bool loadJson(const std::string &path);
         void saveJson(const std::string &path, const ofJson jsonToSave);
+        void importFile();
+        
         
     
         int datasetSize;
