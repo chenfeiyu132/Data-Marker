@@ -7,13 +7,15 @@
 
 #include "TextBox.hpp"
 
-void TextBox::setup(const std::string &text, const int &width, const int &x, const int &y) {
+void TextBox::setup(const std::string &text, const std::string &title, const int &width, const int &x, const int &y) {
     
     Tweet.set("Tweet", true);
     this->x = x;
     this->y = y;
     this->text = text;
     this->width = width;
+    this->title = title;
+    this->backgroundEnabled = true;
     paragraph = ofxParagraph(text, width);
     paragraph.setFont("verdana.ttf", 12);
     paragraph.setIndent(0);
@@ -25,9 +27,11 @@ void TextBox::setup(const std::string &text, const int &width, const int &x, con
 void TextBox::draw() {
     if(Tweet) {
         ofSetColor(15);
-        ofDrawBitmapString("Tweet", x+paragraph.getWidth()/2, y-paragraph.getHeight()/2-12);
-        ofSetColor(255);
-        ofDrawRectRounded(x, y-paragraph.getHeight()/2, paragraph.getWidth(), paragraph.getHeight()*2, 10);
+        ofDrawBitmapString(title, x+paragraph.getWidth()/2-text.length(), y-paragraph.getHeight()/2-12);
+        if(backgroundEnabled){
+            ofSetColor(255);
+            ofDrawRectRounded(x, y-paragraph.getHeight()/2, paragraph.getWidth(), paragraph.getHeight()*2, 10);
+        }
         ofSetColor(0);
         paragraph.draw(x, y);
     }
@@ -54,6 +58,9 @@ void TextBox::setWidth(const int &width) {
     this->width = width;
     paragraph = ofxParagraph(text, this->width);
 }
+void TextBox::setBackgroundEnabled(const bool &enabled) {
+    this->backgroundEnabled = enabled;
+}
 int TextBox::getX() {
     return this->x;
 }
@@ -63,6 +70,10 @@ int TextBox::getY() {
 int TextBox::getWidth(){
     return this->width;
 }
+bool TextBox::getBackgroundEnabled(){
+    return this->backgroundEnabled;
+}
+
 
 
 

@@ -42,6 +42,7 @@ class ofApp : public ofBaseApp{
         ofParameterGroup modeSelection;
         
         TextBox textbox;
+        TextBox timestampBox;
         ImageBox imgbox;
         void updateTweet();
     

@@ -112,9 +112,6 @@ void ofApp::setup(){
         ofLog() << input.text;
     });
     
-    
-    
-    
     //initialize labelbox with binary label
     onModeChange(labelOptions);
     labelingBox.setup(labelOptions, "labels", ofGetWidth()-210, panel->getHeight());
@@ -172,6 +169,7 @@ void ofApp::draw(){
     ofSetColor(0);
     ofDrawBitmapString("Image", imgbox.x + imgbox.img.getWidth()/2-5, imgbox.y-20);
     textbox.draw();
+    timestampBox.draw();
     
     labelingBox.draw();
 }
@@ -328,14 +326,21 @@ void ofApp::importFile() {
 
 void ofApp::updateTweet() {
     if(!tweet.value()["full_text"].empty()) {
-        textbox.setup(tweet.value()["full_text"], (ofGetWidth()-220)*4/5, (ofGetWidth()-220)*1/10, ofGetHeight()*3/4);
+        textbox.setup(tweet.value()["full_text"], "Tweet", (ofGetWidth()-220)*4/5, (ofGetWidth()-220)/10, ofGetHeight()*6/7);
     } else {
-        textbox.setup("No text available", (ofGetWidth()-220)*4/5, (ofGetWidth()-220)*1/10, ofGetHeight()*3/4);
+        textbox.setup("No text available", "Tweet", (ofGetWidth()-220)*4/5, (ofGetWidth()-220)/10, ofGetHeight()*6/7);
     }
-    if(!tweet.value()["media"]["media_url_https"].empty()) {
-        imgbox.setup(tweet.value()["media"]["media_url_https"], (ofGetWidth()-220)*4/5, ofGetHeight()*3/5,(ofGetWidth()-220)*1/10, ofGetHeight()*1/20);
-        ofLog() << "Media url found " << tweet.value()["media_url_https"];
+    if(!tweet.value()["extended_entities"]["media"][0]["media_url_https"].empty()) {
+        imgbox.setup(tweet.value()["extended_entities"]["media"][0]["media_url_https"], (ofGetWidth()-220)*4/5, ofGetHeight()*3/5,(ofGetWidth()-220)/10, ofGetHeight()/6);
+        ofLog() << "Media url found " << tweet.value()["extended_entities"]["media"][0]["media_url_https"];
     } else {
-        imgbox.setup("", (ofGetWidth()-220)*4/5, ofGetHeight()*3/5, (ofGetWidth()-220)*1/10, ofGetHeight()*1/20);
+        imgbox.setup("", (ofGetWidth()-220)*4/5, ofGetHeight()*3/5, (ofGetWidth()-220)/10, ofGetHeight()/6);
+    }
+    if(!tweet.value()["created_at"].empty()) {
+        timestampBox.setup(tweet.value()["created_at"], "Timestamp", (ofGetWidth()-220)/3, (ofGetWidth()-220)/20, ofGetHeight()*1/10);
+        timestampBox.setBackgroundEnabled(false);
+    } else {
+        timestampBox.setup("No Timestamp Available", "Timestamp", (ofGetWidth()-220)/3, (ofGetWidth()-220)/20, ofGetHeight()*1/10);
+        timestampBox.setBackgroundEnabled(false);
     }
 }

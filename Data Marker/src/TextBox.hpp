@@ -14,7 +14,7 @@
 
 class TextBox{
 public:
-    void setup(const std::string &text, const int& width, const int &x, const int &y);
+    void setup(const std::string &text, const std::string &title, const int& width, const int &x, const int &y);
     void draw();
     void setText(const std::string &text);
     string getText();
@@ -23,9 +23,11 @@ public:
     void setX(const int &x);
     void setY(const int &y);
     void setWidth(const int &width);
+    void setBackgroundEnabled(const bool &enabled);
     int getX();
     int getY();
     int getWidth();
+    bool getBackgroundEnabled();
     ofParameter<bool> Tweet;
     ofxParagraph paragraph;
     
@@ -35,7 +37,8 @@ private:
     int y;
     int width;
     std::string text;
-    
+    std::string title;
+    bool backgroundEnabled;
 };
 
 #endif /* TextBox_hpp */
