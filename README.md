@@ -1,4 +1,4 @@
-#Data Marker
+#Data Marker#
 
 You ever feel exhausted of writing boring code to manually label data points? You ever wished there was a convenient interface for the labeling of Twitter posts? If you have ever struggled with the strenuous process of data labeling, you are in luck! 
 
